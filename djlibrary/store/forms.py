@@ -1,5 +1,7 @@
 from django import forms
-from django.forms import formset_factory
+from django.forms import (formset_factory, modelformset_factory)
+
+from .models import Book
 
 
 class BookForm(forms.Form):
@@ -13,3 +15,13 @@ class BookForm(forms.Form):
 
 
 BookFormset = formset_factory(BookForm)
+BookModelFormset = modelformset_factory(
+    Book,
+    fields=('name', ),
+    extra=1,
+    widgets={'name': forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter Book Name here'
+        })
+    }
+)

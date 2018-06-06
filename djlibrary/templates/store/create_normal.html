@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 
 {% block container %}
+{% if heading %}
+<h3>{{heading}}</h3>
+{% endif %}
 <form class="form-horizontal" method="POST" action="">
     {% csrf_token %}
 {{ formset.management_form }}
 {% for form in formset %}
 <div class="row form-row spacer">
-    <div class="col-2 offset-1">
+    <div class="col-2">
         <label>{{form.name.label}}</label>
     </div>
     <div class="col-4">
@@ -20,7 +23,7 @@
 </div>
 {% endfor %}
 <div class="row spacer">
-    <div class="col-4 offset-3">
+    <div class="col-4 offset-2">
         <button type="submit" class="btn btn-block btn-primary">Create</button>
     </div>
 </div>
