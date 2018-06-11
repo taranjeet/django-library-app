@@ -1,8 +1,13 @@
 from django.shortcuts import render, redirect
 from django.views import generic
 
-from .forms import (BookFormset, BookModelFormset)
-from .models import Book
+from .forms import (
+    BookFormset,
+    BookModelFormset,
+    BookModelForm,
+    AuthorFormset
+)
+from .models import Book, Author
 
 
 def create_book_normal(request):
@@ -50,4 +55,27 @@ def create_book_model_form(request):
     return render(request, template_name, {
         'formset': formset,
         'heading': heading_message,
+    })
+
+
+def create_book_with_authors(request):
+    template_name = 'store/create_with_author.html'
+    if request.method == 'GET':
+        bookform = BookModelForm(request.GET or None)
+        formset = AuthorFormset(queryset=Author.objects.none())
+    elif request.method == 'POST':
+        bookform = BookModelForm(request.POST)
+        formset = AuthorFormset(request.POST)
+        if bookform.is_valid() and formset.is_valid():
+            # first save this book, as its reference will be used in `Author`
+            book = bookform.save()
+            for form in formset:
+                # so that `book` instance can be attached.
+                author = form.save(commit=False)
+                author.book = book
+                author.save()
+            return redirect('store:book_list')
+    return render(request, template_name, {
+        'bookform': bookform,
+        'formset': formset,
     })

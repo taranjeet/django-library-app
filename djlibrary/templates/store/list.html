@@ -1,9 +1,16 @@
 {% extends "base.html" %}
 
 {% block container %}
-<ul>
+<table class="table">
+    <tr>
+        <th>Book</th>
+        <th>Author</th>
+    </tr>
 {% for book in books %}
-    <li>{{book.name}}</li>
+    <tr>
+        <td>{{book.name}}</td>
+        <td>{{book.get_authors}}</td>
+    </tr>
 {% endfor %}
-</ul>
+</table>
 {% endblock %}
