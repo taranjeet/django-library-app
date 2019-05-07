@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block container %}
+<p>Welcome to Django library app. This is a demo application for this <a href="https://medium.com/@taranjeet/adding-forms-dynamically-to-a-django-formset-375f1090c2b0">blog post</a>
+
+<p>This app contains the following urls</p>
+
+<ul>
+    <li><a href="{% url 'store:book_list'%}">Book List</a></li>
+    <li><a href="{% url 'store:create_book_normal'%}">Add multiple books using normal forms</a></li>
+    <li><a href="{% url 'store:create_book_model_form'%}">Add multiple books using model forms</a></li>
+    <li><a href="{% url 'store:create_book_with_authors'%}">Add a book with multiple author, both using model forms</a></li>
+</ul>
+{% endblock %}
