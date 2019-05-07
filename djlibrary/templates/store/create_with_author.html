@@ -53,7 +53,7 @@ function updateElementIndex(el, prefix, ndx) {
 function cloneMore(selector, prefix) {
     var newElement = $(selector).clone(true);
     var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
-    newElement.find(':input').each(function() {
+    newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function() {
         var name = $(this).attr('name')
         if(name) {
             name = name.replace('-' + (total-1) + '-', '-' + total + '-');
