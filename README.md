@@ -14,11 +14,12 @@ git clone https://github.com/taranjeet/django-library-app.git
 
 ```
 cd django-library-app
-virtualenv pyenv
+virtualenv -p $(which python3) pyenv
 # activate virtual environment
 source pyenv/bin/activate
 # install packages
 pip install -r requirements.txt
+cd djlibrary
 ```
 
 * Run migrate command
