@@ -51,6 +51,13 @@ function cloneMore(selector, prefix) {
             $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
         }
     });
+    newElement.find('label').each(function() {
+        var forValue = $(this).attr('for');
+        if (forValue) {
+          forValue = forValue.replace('-' + (total-1) + '-', '-' + total + '-');
+          $(this).attr({'for': forValue});
+        }
+    });
     total++;
     $('#id_' + prefix + '-TOTAL_FORMS').val(total);
     $(selector).after(newElement);
